@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Mont</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="google-site-verification" content="vMixHpE9BA2UaZ6CGwbh_0a7k6M4GMnEP4wfAODNtnU" />
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="{{url_for('static',filename='images/logo.png')}}" alt="logo" width="200px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="{{url_for('static',filename='images/cart.png')}}" width="30px" height="30px"></a>
+                <img src="{{url_for('static',filename='images/menu.png')}}" class="menu-icon" onclick="menutoggle()">
+            </div>
