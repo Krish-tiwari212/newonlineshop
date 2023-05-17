@@ -1,4 +1,41 @@
-{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Mont</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="google-site-verification" content="vMixHpE9BA2UaZ6CGwbh_0a7k6M4GMnEP4wfAODNtnU" />
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='images/logo.png')}}" alt="logo" width="200px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="{{url_for('home')}}">Home</a></li>
+                        <li><a href="{{url_for('all_products')}}">Products</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        {% if not current_user.is_authenticated: %}
+                        <li><a href="{{url_for('account')}}">Account</a></li>
+                        {% else: %}
+                        <li><a href="{{url_for('logout')}}">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <a class="snipcart-checkout"><img src="{{url_for('static',filename='images/cart.png')}}" width="30px" height="30px"></a>
+                <img src="{{url_for('static',filename='images/menu.png')}}" class="menu-icon" onclick="menutoggle()">
+            </div>
             <div class="row">
                 <div class="col-2">
                     <h1>Fashion is like eating<br>you shouldn't stick to the same menu</h1>
@@ -36,7 +73,7 @@
         <h2 class="title">Featured Products</h2>
         <div class="row">
             <div class="col-4">
-                <a href="product_details.html"><img src="{{url_for('static',filename='images/product-1.jpg')}}"></a>
+                <a href="{{url_for('product')}}"><img src="{{url_for('static',filename='images/product-1.jpg')}}"></a>
                 <h4>Red Printed T-Shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
