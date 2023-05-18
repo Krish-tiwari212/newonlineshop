@@ -29,7 +29,7 @@
                         {% else: %}
                         <li><a href="{{url_for('logout')}}">Logout</a></li>
                         {% endif %}
-                        {% if current_user.id == 1 or current_user.name == "useroperator1": %}
+                        {% if current_user.id == 1 or current_user.username == "useroperator1": %}
                         <li><a href="{{url_for('add_product')}}">Add Product</a></li>
                         {% endif %}
                     </ul>

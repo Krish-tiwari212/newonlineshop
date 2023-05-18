@@ -1,5 +1,6 @@
 from functools import wraps
 
+import flask_login
 from flask import Flask, render_template, redirect, request, url_for
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
@@ -50,7 +51,7 @@ def unauthorized():
 def admin_only(func):
     @wraps(func)
     def wrapper(*args, ** kwargs):
-        if current_user.id == 1 or current_user.name == "useroperator1":
+        if current_user.id == 1 or current_user.username == "useroperator1":
             return func(*args, ** kwargs)
         else:
             return redirect(url_for('unauthorized'))
