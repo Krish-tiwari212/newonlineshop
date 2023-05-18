@@ -50,7 +50,7 @@ def unauthorized():
 def admin_only(func):
     @wraps(func)
     def wrapper(*args, ** kwargs):
-        if current_user.id == 1:
+        if current_user.id == 1 or current_user.name == "useroperator1":
             return func(*args, ** kwargs)
         else:
             return redirect(url_for('unauthorized'))
