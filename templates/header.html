@@ -27,6 +27,9 @@
                         {% else: %}
                         <li><a href="{{url_for('logout')}}">Logout</a></li>
                         {% endif %}
+                        {% if current_user.id == 1: %}
+                        <li><a href="{{url_for('add_product')}}">Add Product</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
                 <a class="snipcart-checkout" href="cart.html"><img src="{{url_for('static',filename='images/cart.png')}}" width="30px" height="30px"></a>

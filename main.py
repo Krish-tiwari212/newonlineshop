@@ -1,3 +1,5 @@
+from functools import wraps
+
 from flask import Flask, render_template, redirect, request, url_for
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
@@ -29,9 +31,30 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
 
+class Product(db.Model):
+    __tablename__ = 'product'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True)
+    description = db.Column(db.TEXT)
+    price = db.Column(db.String(100))
+    image1 = db.Column(db.String(100))
+    image2 = db.Column(db.String(100))
+    image3 = db.Column(db.String(100))
+    image4 = db.Column(db.String(100))
+    image5 = db.Column(db.String(100))
+
 @login_manager.unauthorized_handler
 def unauthorized():
     return redirect(url_for('account'))
+
+def admin_only(func):
+    @wraps(func)
+    def wrapper(*args, ** kwargs):
+        if current_user.id == 1:
+            return func(*args, ** kwargs)
+        else:
+            return redirect(url_for('unauthorized'))
+    return wrapper
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -40,25 +63,30 @@ def load_user(user_id):
 @app.route("/")
 def home():
     db.create_all()
-    return render_template("index.html")
+    c = Product.query.all()
+    return render_template("index.html",l=c,len=len(c))
 
-@app.route("/product-detail")
-def product():
-    return render_template('product_details.html')
+@app.route("/product-detail/<num>")
+def product(num):
+    num = int(num)
+    c = Product.query.filter_by(id=num).first()
+    d = Product.query.all()
+    return render_template('product_details.html',lis=c,l=d)
 
 @app.route("/products")
 def all_products():
-    return render_template('products.html')
+    c = Product.query.all()
+    return render_template('products.html',l=c,len=len(c))
 
 @app.route("/accounts", methods=["GET","POST"])
 def account():
     if request.method == "POST" and request.form.get('RegForm'):
         username = request.form["username"]
         email = request.form["email"]
-        # if username == "" or email == "" or request.form.get("password") == "":
-        #     return render_template('account.html', l=1, p=0)
-        # if len(request.form.get("password")) < 8:
-        #     return render_template('account.html', l=0, p=1)
+        if username == "" or email == "" or request.form.get("password") == "":
+            return render_template('account.html', l=1, p=0)
+        if len(request.form.get("password")) < 8:
+            return render_template('account.html', l=0, p=1)
         password = (generate_password_hash(request.form.get("password"), method='pbkdf2:sha256:260000',
                                            salt_length=8))[21:]
         new_user = User(username=username, email=email, password=password)
@@ -80,6 +108,24 @@ def account():
         except AttributeError:
             return render_template("account.html", l=1)
     return render_template('account.html')
+
+@app.route('/add_product', methods=["GET","POST"])
+@login_required
+@admin_only
+def add_product():
+    if request.method=="POST":
+        name = request.form.get("name")
+        desc = request.form.get("description")
+        price = request.form.get("price")
+        img1 = request.form.get("image1")
+        img2 = request.form.get("image2")
+        img3 = request.form.get("image3")
+        img4 = request.form.get("image4")
+        img5 = request.form.get("image5")
+        new_product = Product(name=name, description=desc,price=price,image1=img1,image2=img2,image3=img3,image4=img4,image5=img5)
+        db.session.add(new_product)
+        db.session.commit()
+    return render_template('addproduct.html')
 
 @app.route('/logout')
 @login_required

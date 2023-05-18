@@ -4,28 +4,28 @@
     <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
-                <img src="{{url_for('static',filename='images/gallery-1.jpg')}}" width="100%" id="ProductImg">
+                <img src="{{lis['image1']}}" width="100%" id="ProductImg">
 
                 <div class="small-img-row">
                     <div class="small-img-col">
-                        <img src="{{url_for('static',filename='images/gallery-1.jpg')}}" width="100%" class="small-img">
+                        <img src="{{lis['image2']}}" width="100%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{url_for('static',filename='images/gallery-2.jpg')}}" width="100%" class="small-img">
+                        <img src="{{lis['image3']}}" width="100%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{url_for('static',filename='images/gallery-3.jpg')}}" width="100%" class="small-img">
+                        <img src="{{lis['image4']}}" width="100%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{url_for('static',filename='images/gallery-4.jpg')}}" width="100%" class="small-img">
+                        <img src="{{lis['image5']}}" width="100%" class="small-img">
                     </div>
                 </div>
 
             </div>
             <div class="col-2">
                 <p>Home / T-Shirt</p>
-                <h1>Red Printed T-Shirt by HRX</h1>
-                <h4>$50.00</h4>
+                <h1>{{lis['name']}}</h1>
+                <h4>{{lis['price']}}</h4>
 <!--                <select>-->
 <!--                    <option>Select Size</option>-->
 <!--                    <option>XXL</option>-->
@@ -35,15 +35,14 @@
 <!--                    <option>S</option>-->
 <!--                </select>-->
 <!--                <input type="number" value="1">-->
-                <a class="snipcart-add-item btn" data-item-id="red-tshirt" data-item-price="50.00"
-  data-item-description="Good Red Tshirt"
-  data-item-image="{{url_for('static',filename='images/gallery-1.jpg')}}"
-  data-item-name="Red Printed T-Shirt by HRX">Add To Cart</a>
+                <a class="snipcart-add-item btn" data-item-id="{{lis['id']}}" data-item-price="{{lis['price'][1:]}}"
+  data-item-description="{{lis['description']}}"
+  data-item-image="{{lis['image1']}}"
+  data-item-name="{{lis['name']}}" data-item-url="/product-detail/{{lis['id']}}">Add To Cart</a>
 
                 <h3>Product Details <i class="fa fa-indent"></i></h3>
                 <br>
-                <p>Give your summer wardrobe a style upgrade with the HRX Men's Active T-Shirt. Team it with a pair of
-                    shorts for your morning workout or a denims for an evening out with the guys.</p>
+                <p>{{lis['description']}}</p>
             </div>
         </div>
     </div>
@@ -57,54 +56,20 @@
     <!-- Products -->
     <div class="small-container">
         <div class="row">
+            {% for li in l[::-1][:4]: %}
             <div class="col-4">
-                <img src="{{url_for('static',filename='images/product-9.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
+                <a href="{{url_for('product',num=li['id'])}}"><img src="{{li['image1']}}"></a>
+                <h4>{{li['name']}}</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star"></i>
                 </div>
-                <p>$50.00</p>
+                <p>{{li['price']}}</p>
             </div>
-            <div class="col-4">
-                <img src="{{url_for('static',filename='images/product-10.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{{url_for('static',filename='images/product-11.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{{url_for('static',filename='images/product-12.jpg')}}">
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% include 'footer.html' %}

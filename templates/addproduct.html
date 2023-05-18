@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+
+<div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="{{url_for('static',filename='images/image1.png')}}" width="100%">
+                </div>
+                <div class="col-2">
+                    <div class="for-container">
+                        <form id="AddForm" action="{{url_for('add_product')}}" method="post">
+                            <input name="name" type="text" placeholder="Product Name">
+                            <input name="description" type="text" placeholder="Description">
+                            <input name="price" type="text" placeholder="Price">
+                            <input name="image1" type="text" placeholder="Image1">
+                            <input name="image2" type="text" placeholder="Image2">
+                            <input name="image3" type="text" placeholder="Image3">
+                            <input name="image4" type="text" placeholder="Image4">
+                            <input name="image5" type="text" placeholder="Image5">
+                            <input type="submit" class="btn" value="Submit" name="AddForm">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% include 'footer.html' %}
