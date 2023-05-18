@@ -86,6 +86,9 @@
                     <i class="fa fa-star"></i>
                 </div>
                 <p>{{lis['price']}}</p>
+                {% if current_user.id == 1 or current_user.username == "useroperator1": %}
+                <a href="{{url_for('dele',num=lis['id'])}}">✘</a>
+                {% endif %}
             </div>
             {% endfor %}
             {% else: %}
@@ -101,6 +104,9 @@
                     <i class="fa fa-star"></i>
                 </div>
                 <p>{{lis['price']}}</p>
+                {% if current_user.id == 1 or current_user.username == "useroperator1": %}
+                <a href="{{url_for('dele',num=lis['id'])}}">✘</a>
+                {% endif %}
             </div>
             {% endfor %}
             {% endif %}
@@ -120,6 +126,9 @@
                     <i class="fa fa-star"></i>
                 </div>
                 <p>{{lis['price']}}</p>
+                {% if current_user.id == 1 or current_user.username == "useroperator1": %}
+                <a href="{{url_for('dele',num=lis['id'])}}">✘</a>
+                {% endif %}
             </div>
             {% endfor %}
             {% else: %}
@@ -135,6 +144,9 @@
                     <i class="fa fa-star"></i>
                 </div>
                 <p>{{lis['price']}}</p>
+                {% if current_user.id == 1 or current_user.username == "useroperator1": %}
+                <a href="{{url_for('dele',num=lis['id'])}}">✘</a>
+                {% endif %}
             </div>
             {% endfor %}
             {% endif %}
@@ -153,6 +165,9 @@
                     <i class="fa fa-star"></i>
                 </div>
                 <p>{{lis['price']}}</p>
+                {% if current_user.id == 1 or current_user.username == "useroperator1": %}
+                <a href="{{url_for('dele',num=lis['id'])}}">✘</a>
+                {% endif %}
             </div>
             {% endfor %}
         </div>

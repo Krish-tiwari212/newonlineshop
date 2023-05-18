@@ -128,6 +128,15 @@ def add_product():
         db.session.commit()
     return render_template('addproduct.html')
 
+@app.route("/delete/<num>")
+@login_required
+@admin_only
+def dele(num):
+    c = db.session.query(Product).filter_by(id=int(num)).first()
+    db.session.delete(c)
+    db.session.commit()
+    return redirect("/")
+
 @app.route('/logout')
 @login_required
 def logout():
